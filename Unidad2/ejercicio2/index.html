@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ejercicio 1</title>
+  <style>
+    #canvas {
+      border: 1px solid black;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="canvas"></canvas>
+  <script>
+    const canvas = document.getElementById('canvas');
+    const ctx = canvas.getContext('2d');
+    ctx.fillStyle = '#C35F';
+    ctx.strokeStyle = '#000000';
+
+    ctx.beginPath();
+    ctx.moveTo(150, 10);
+    ctx.lineTo(200, 100);
+    ctx.lineTo(100, 100);
+    ctx.fill();
+    ctx.stroke();
+    ctx.closePath();
+
+    ctx.beginPath();
+    ctx.moveTo(100, 100);
+    ctx.lineTo(60, 120);
+    ctx.stroke();
+  </script>
+</body>
+</html>
