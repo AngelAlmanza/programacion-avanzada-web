@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ejercicio 8</title>
+  <style>
+    #canvas {
+      border: 1px solid black;
+    }
+    img {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="canvas" width="600" height="800"></canvas>
+  <img src="./descarga.png" id="image">
+  <script>
+    const canvas = document.getElementById('canvas');
+    ctx = canvas.getContext('2d');
+    const img = document.getElementById('image');
+    ctx.drawImage(img, 20, 20);
+  </script>
+</body>
+</html>

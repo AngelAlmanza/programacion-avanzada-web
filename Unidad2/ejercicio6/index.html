@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ejercicio 6</title>
+  <style>
+    #canvas {
+      border: 1px solid black;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="canvas"></canvas>
+  <script>
+    const canvas = document.getElementById('canvas');
+    ctx = canvas.getContext('2d');
+    ctx.fillStyle = 'red';
+    ctx.font = "20px Arial"
+    ctx.fillText("Hola mundo", 180, 20);
+    ctx.strokeStyle = 'green';
+    ctx.strokeText("Hola mundo", 180, 20);
+  </script>
+</body>
+</html>

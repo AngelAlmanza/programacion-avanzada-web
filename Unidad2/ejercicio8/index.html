@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ejercicio 8</title>
+  <style>
+    #canvas {
+      border: 1px solid black;
+    }
+    body {
+      background-color: black;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="canvas"></canvas>
+  <script>
+    const canvas = document.getElementById('canvas');
+    ctx = canvas.getContext('2d');
+
+    const my_gradient = ctx.createRadialGradient(75, 50, 5, 90, 60, 100);
+    my_gradient.addColorStop(0, '#F24B0D');
+    my_gradient.addColorStop(1, '#29F20D');
+    ctx.fillStyle = my_gradient;
+    ctx.fillRect(10, 10, 150, 100);
+  </script>
+</body>
+</html>
