@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ejercicio 12</title>
+  <style>
+    body {
+      background-color: black;
+    }
+    canvas {
+      background-color: white;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="canvas" width="500" height="500"></canvas>
+  <script>
+    function getRandomColorRGBA() {
+      const r = Math.floor(Math.random() * 256); // Valor rojo (0-255)
+      const g = Math.floor(Math.random() * 256); // Valor verde (0-255)
+      const b = Math.floor(Math.random() * 256); // Valor azul (0-255)
+      const a = Math.random(); // Valor de opacidad (0-1)
+      return `rgba(${r}, ${g}, ${b}, ${a})`;
+    }
+    const canvas = document.getElementById('canvas');
+    const ctx = canvas.getContext('2d');
+    let color = "rgba(13, 242, 23, 0.5)";
+    let figura = false;
+    canvas.addEventListener('click', (e) => {
+      ctx.fillStyle = color;
+      if (figura) {
+        ctx.beginPath();
+        ctx.arc(e.layerX, e.layerY, 50, 0, 2 * Math.PI);
+        ctx.fill();
+        ctx.stroke();
+        ctx.closePath();
+      } else {
+        ctx.beginPath();
+        ctx.fillRect(e.layerX - 50, e.layerY - 50, 50, 50);
+        ctx.strokeRect(e.layerX - 50, e.layerY - 50, 50, 50)
+        ctx.closePath();
+      }
+    });
+    canvas.addEventListener('mouseover', (e) => {
+      color = getRandomColorRGBA();
+    });
+    canvas.addEventListener('mouseout', (e) => {
+      figura = !figura;
+    });
+  </script>
+</body>
+</html>
