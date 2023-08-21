@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ejercicio 10</title>
+  <style>
+    body {
+      background-color: black;
+    }
+    canvas {
+      background-color: white;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="canvas" width="500" height="500"></canvas>
+  <script>
+    const canvas = document.getElementById('canvas');
+    const ctx = canvas.getContext('2d');
+    canvas.addEventListener('click', (e) => {
+      ctx.fillStyle = "rgba(13, 242, 23, 0.5)";
+      ctx.beginPath();
+      ctx.arc(e.layerX, e.layerY, 50, 0, 2 * Math.PI);
+      ctx.fill();
+      ctx.stroke();
+      ctx.closePath();
+    });
+  </script>
+</body>
+</html>
