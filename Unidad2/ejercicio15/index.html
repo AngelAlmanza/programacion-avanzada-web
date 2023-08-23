@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ejercicio 15</title>
+  <style>
+    body {
+      background-color: black;
+    }
+    canvas {
+      background-color: white;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="canvas" width="500" height="500"></canvas>
+  <script>
+    const getRandomColorRGBA = () => {
+      const r = Math.floor(Math.random() * 256);
+      const g = Math.floor(Math.random() * 256);
+      const b = Math.floor(Math.random() * 256);
+      const a = Math.random();
+      return `rgba(${r}, ${g}, ${b}, ${a})`;
+    };
+    const canvas = document.getElementById('canvas');
+    const ctx = canvas.getContext('2d');
+    let pressed = false;
+    let figura = false;
+    let color;
+    canvas.addEventListener('mousemove', (e) => {
+      if (pressed) {
+        ctx.beginPath();
+        ctx.arc(e.layerX, e.layerY, 10, 0, 2 * Math.PI);
+        ctx.fill();
+        ctx.closePath();
+      }
+    });
+    canvas.addEventListener('mousedown', (e) => {
+      pressed = true;
+      ctx.fillStyle = color;
+      if (figura) {
+        ctx.beginPath();
+        ctx.arc(e.layerX, e.layerY, 50, 0, 2 * Math.PI);
+        ctx.fill();
+        ctx.stroke();
+        ctx.closePath();
+      } else {
+        ctx.beginPath();
+        ctx.fillRect(e.layerX - 25, e.layerY - 25, 50, 50);
+        ctx.strokeRect(e.layerX - 25, e.layerY - 25, 50, 50)
+        ctx.closePath();
+      }
+    });
+    canvas.addEventListener('mouseup', (e) => {
+      pressed = false;
+    });
+    canvas.addEventListener('mouseover', (e) => {
+      color = getRandomColorRGBA();
+      pressed = false;
+    });
+    canvas.addEventListener('mouseout', (e) => {
+      figura = !figura;
+    });
+  </script>
+</body>
+</html>
