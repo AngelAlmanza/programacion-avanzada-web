@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ejercicio 18</title>
+  <style>
+    body {
+      background-color: black;
+    }
+    canvas {
+      background-color: white;
+      border: 1px solid black;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="canvas" width="800" height="600"></canvas>
+  <script>
+    function getRandomColorRGBA() {
+      const r = Math.floor(Math.random() * 256);
+      const g = Math.floor(Math.random() * 256);
+      const b = Math.floor(Math.random() * 256);
+      const a = Math.random();
+      return `rgba(${r}, ${g}, ${b}, ${a})`;
+    }
+
+    function repaint() {
+      ctx.beginPath();
+      ctx.fillRect(x, y, 50, 50);
+      ctx.strokeRect(x, y, 50, 50);
+      ctx.closePath();
+    };
+
+    function getRandomX() {
+      return Math.floor(Math.random() * 801);
+    }
+
+    function getRandomY() {
+      return Math.floor(Math.random() * 601);
+    }
+
+    const canvas = document.getElementById('canvas');
+    const ctx = canvas.getContext('2d');
+    let x;
+    let y;
+
+    document.addEventListener('keydown', (e) => {
+      ctx.fillStyle = getRandomColorRGBA();
+      x = getRandomX();
+      y = getRandomY();
+      repaint();
+    });
+  </script>
+</body>
+</html>
