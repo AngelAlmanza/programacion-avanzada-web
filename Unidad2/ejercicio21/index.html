@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ejercicio 21</title>
+  <style>
+    body {
+      background-color: black;
+    }
+    canvas {
+      background-color: white;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="canvas" width="800" height="600"></canvas>
+  <script>
+    const canvas = document.getElementById('canvas');
+    const ctx = canvas.getContext('2d');
+
+    // Colores
+    const PIEL = '#FDDDCA';
+    const CAMISA = '#352F44';
+    const PANTALON = '#1450A3';
+    const NEGRO = '#000000';
+    const BLANCO = '#FFFFFF';
+    const GORRO = '#141E46';
+
+    ctx.fillStyle = PIEL;
+    ctx.strokeStyle = PIEL;
+
+    // Cuello
+    ctx.beginPath();
+    ctx.fillStyle = PIEL;
+    ctx.fillRect(385, 130, 30, 30);
+    ctx.closePath();
+
+    // Cabeza
+    ctx.beginPath();
+    ctx.fillStyle = PIEL;
+    ctx.arc(400, 100, 50, 50, 0, 2 * Math.PI);
+    ctx.fill();
+    ctx.closePath();
+    // Ojo izquierdo
+    ctx.beginPath();
+    ctx.fillStyle = NEGRO;
+    ctx.arc(385, 100, 5, 50, 0, 2 * Math.PI);
+    ctx.arc(415, 100, 5, 50, 0, 2 * Math.PI);
+    ctx.fill();
+    ctx.closePath();
+    ctx.beginPath();
+    ctx.strokeStyle = NEGRO;
+    ctx.arc(400, 130, 10, Math.PI, 2 * Math.PI, true);
+    ctx.stroke();
+    ctx.closePath();
+
+    // Cuerpo
+    ctx.beginPath();
+    ctx.fillStyle = CAMISA;
+    ctx.fillRect(360, 160, 80, 200);
+    ctx.closePath();
+
+    // Brazo izquierdo
+    ctx.beginPath();
+    ctx.fillStyle = PIEL;
+    ctx.moveTo(360, 160);
+    ctx.lineTo(300, 290);
+    ctx.lineTo(330, 300);
+    ctx.lineTo(360, 230);
+    ctx.fill();
+    ctx.stroke();
+    ctx.closePath();
+    // Manga izquierda
+    ctx.beginPath();
+    ctx.fillStyle = CAMISA;
+    ctx.moveTo(360, 160);
+    ctx.lineTo(326, 235);
+    ctx.lineTo(354, 248);
+    ctx.lineTo(360, 230);
+    ctx.fill();
+    ctx.closePath();
+
+    // Brazo derecho
+    ctx.beginPath();
+    ctx.fillStyle = PIEL;
+    ctx.moveTo(440, 160);
+    ctx.lineTo(510, 290);
+    ctx.lineTo(480, 300);
+    ctx.lineTo(440, 230);
+    ctx.fill();
+    ctx.stroke();
+    ctx.closePath();
+    // Manga derecha
+    ctx.beginPath();
+    ctx.fillStyle = CAMISA;
+    ctx.moveTo(440, 160);
+    ctx.lineTo(480, 235);
+    ctx.lineTo(450, 248);
+    ctx.lineTo(440, 230);
+    ctx.fill();
+    ctx.closePath();
+
+    // Pierna izquierda
+    ctx.beginPath();
+    ctx.fillStyle = PANTALON;
+    ctx.fillRect(360, 360, 20, 130);
+    ctx.closePath();
+
+    // Pierna derecha
+    ctx.beginPath();
+    ctx.fillStyle = PANTALON;
+    ctx.fillRect(420, 360, 20, 130);
+    ctx.closePath();
+
+    // Pie izquierdo
+    ctx.beginPath();
+    ctx.fillStyle = NEGRO;
+    ctx.fillRect(340, 490, 40, 30);
+    ctx.fillRect(320, 500, 20, 20);
+    ctx.closePath();
+
+    // Pie derecho
+    ctx.beginPath();
+    ctx.fillStyle = NEGRO;
+    ctx.fillRect(420, 490, 40, 30);
+    ctx.fillRect(460, 500, 20, 20);
+    ctx.closePath();
+
+    // Parte superior del pantalon
+    ctx.beginPath();
+    ctx.fillStyle = PANTALON;
+    ctx.fillRect(360, 320, 80, 40);
+    ctx.closePath();
+
+    // Gorro
+    ctx.beginPath();
+    ctx.fillStyle = GORRO;
+    ctx.fillRect(350, 55, 100, 30);
+    ctx.fillRect(360, 45, 80, 10);
+    ctx.fillRect(370, 35, 60, 10);
+    ctx.closePath();
+    // Texto Gorro
+    ctx.font = "12px Roboto";
+    ctx.fillStyle = BLANCO;
+    ctx.fillText("I hate canvas", 370, 70);
+
+    // Logo
+    ctx.beginPath();
+    ctx.strokeStyle = BLANCO;
+    ctx.lineWidth = 5;
+    ctx.moveTo(380, 220);
+    ctx.lineTo(400, 240);
+    ctx.lineTo(380, 260);
+    ctx.stroke();
+    ctx.closePath();
+    ctx.beginPath();
+    ctx.moveTo(390, 260);
+    ctx.lineTo(420, 260);
+    ctx.stroke();
+    ctx.closePath();
+
+    // Cuello / Camisa
+    ctx.beginPath();
+    ctx.fillStyle = PIEL;
+    ctx.arc(400, 160, 15, Math.PI, 2 * Math.PI, true);
+    ctx.fill();
+    ctx.closePath();
+
+    // ctx.beginPath();
+    // ctx.fillStyle = PIEL;
+    // ctx.arc(320, 300, 15, Math.PI, 2 * Math.PI, true);
+    // ctx.fill();
+    // ctx.closePath();
+
+
+    canvas.addEventListener('click', (e) => console.log(`X: ${e.layerX}, Y: ${e.layerY}`));
+  </script>
+</body>
+</html>
