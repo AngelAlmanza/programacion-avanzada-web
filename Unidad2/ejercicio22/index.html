@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ejercicio 22</title>
+</head>
+<body>
+  <canvas id="canvas" width="800" height="600"></canvas>
+  <script>
+    const canvas = document.getElementById('canvas');
+    const ctx = canvas.getContext('2d');
+
+    // Fondo
+    const gradiente = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
+    gradiente.addColorStop(0, '#ADD8E6');
+    gradiente.addColorStop(0.25, '#9CCCDC');
+    gradiente.addColorStop(0.5, '#8BC0D1');
+    gradiente.addColorStop(0.75, '#7AB4C7');
+    gradiente.addColorStop(1, '#69A8BD');
+    ctx.fillStyle = gradiente;
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    // Colores
+    const SOL = '#FFFD8C';
+    const PASTO = '#96C291';
+    const MONTANIA = '#9E9FA5';
+    const MADERA = '#65451F';
+
+    // Sol
+    ctx.fillStyle = SOL;
+    ctx.beginPath();
+    ctx.arc(100, 100, 50, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.closePath();
+
+    // Rayos del sol
+    ctx.strokeStyle = SOL;
+    ctx.lineWidth = 3;
+    for (let i = 0; i < 30; i++) {
+      const angulo = (i * 12) * (Math.PI / 180);
+      const x1 = Math.cos(angulo) * 70 + 100;
+      const y1 = Math.sin(angulo) * 70 + 100;
+      const x2 = Math.cos(angulo) * 90 + 100;
+      const y2 = Math.sin(angulo) * 90 + 100;
+      ctx.beginPath();
+      ctx.moveTo(x1, y1);
+      ctx.lineTo(x2, y2);
+      ctx.stroke();
+      ctx.closePath();
+    }
+    ctx.lineWidth = 1;
+
+    // Pasto
+    ctx.fillStyle = PASTO;
+    ctx.fillRect(0, 400, canvas.width, canvas.height - 400);
+
+    // Montañas
+    ctx.fillStyle = MONTANIA;
+    ctx.beginPath();
+    ctx.moveTo(200, 400);
+    ctx.lineTo(500, 100);
+    ctx.lineTo(800, 400);
+    ctx.fill();
+    ctx.closePath();
+    ctx.beginPath();
+    ctx.moveTo(0, 220);
+    ctx.lineTo(200, 400);
+    ctx.lineTo(0, 400);
+    ctx.fill();
+    ctx.closePath();
+    ctx.beginPath();
+    ctx.moveTo(100, 400);
+    ctx.lineTo(180, 180);
+    ctx.lineTo(350, 400);
+    ctx.fill();
+    ctx.closePath();
+
+    // Árboles
+    ctx.fillStyle = MADERA;
+    ctx.fillRect(600, 260, 20, 140);
+    ctx.fillRect(400, 300, 20, 140);
+    ctx.fillRect(200, 270, 20, 140);
+    ctx.fillRect(650, 500, 20, 140);
+    ctx.fillStyle = 'green';
+    ctx.beginPath();
+    ctx.arc(610, 220, 50, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.closePath();
+    ctx.beginPath();
+    ctx.arc(410, 260, 50, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.closePath();
+    ctx.beginPath();
+    ctx.arc(210, 230, 50, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.closePath();
+    ctx.beginPath();
+    ctx.arc(660, 460, 50, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.closePath();
+
+    // Arbusto
+    ctx.fillStyle = 'green';
+    ctx.beginPath();
+    ctx.arc(0, 600, 150, 0, Math.PI / 2, true);
+    ctx.fill();
+    ctx.closePath();
+    ctx.beginPath();
+    ctx.arc(160, 540, 80, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.closePath();
+    ctx.beginPath();
+    ctx.arc(220, 580, 50, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.closePath();
+
+    canvas.addEventListener('click', (e) => {
+      console.log(`X: ${e.layerX}, Y: ${e.layerY}`);
+    });
+  </script>
+</body>
+</html>
