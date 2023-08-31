@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ejercicio 23</title>
+</head>
+<body>
+  <canvas id="canvas" width="800" height="600"></canvas>
+  <script>
+    const canvas = document.getElementById('canvas');
+    const ctx = canvas.getContext('2d');
+
+    // Mostrar coordenadas
+    canvas.addEventListener('click', (e) => {
+      console.log(`X: ${e.layerX}, Y: ${e.layerY}`);
+    });
+
+    // Gradiente cielo
+    const gradienteCielo = ctx.createLinearGradient(0, 0, canvas.width, 0);
+    gradienteCielo.addColorStop(0, "#A0FFF0");
+    gradienteCielo.addColorStop(0.2, "#8EF5F9");
+    gradienteCielo.addColorStop(0.4, "#85EAFF");
+    gradienteCielo.addColorStop(0.6, "#86DDFF");
+    gradienteCielo.addColorStop(0.8, "#90D0FF");
+    ctx.fillStyle = gradienteCielo;
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    // Colores
+    const SUELO = '#FFC8B8';
+    const NEGRO = '#000000';
+    const TORNILLO = '#507F78';
+    const NARANJA_SUELO = '#FFA000';
+    const ULTIMO_BLOQUE = '#70F040';
+
+    // Función para dibujar líneas en el suelo
+    const dibujarLineasSuelo = (x, y, acumulado) => {
+      if (acumulado >= 14) {
+        return;
+      }
+      ctx.fillRect(x, y, 10, 5);
+      return dibujarLineasSuelo(x + 5, y + 5, acumulado + 1);
+    };
+
+    // Gradiente para cajitas
+    const gradienteCubito = ctx.createLinearGradient(0, 0, canvas.width, 0);
+    gradienteCubito.addColorStop(0, "#FFA000");
+    gradienteCubito.addColorStop(0.2, "#F49900");
+    gradienteCubito.addColorStop(0.4, "#E99200");
+    gradienteCubito.addColorStop(0.6, "#DF8C00");
+    gradienteCubito.addColorStop(0.8, "#D48500");
+    ctx.fillStyle = gradienteCubito;
+
+    // Dibujar cajitas
+    ctx.fillRect(60, 310, 40, 40);
+    ctx.strokeRect(60, 310, 40, 40);
+    ctx.fillRect(100, 310, 40, 40);
+    ctx.strokeRect(100, 310, 40, 40);
+    ctx.fillRect(220, 180, 40, 40);
+    ctx.strokeRect(220, 180, 40, 40);
+    ctx.fillRect(260, 180, 40, 40);
+    ctx.strokeRect(260, 180, 40, 40);
+
+    // Dibujar suelo
+    ctx.fillStyle = SUELO;
+    ctx.fillRect(0, 500, canvas.width, 100);
+    ctx.strokeRect(0, 500, canvas.width, 100);
+    ctx.fillStyle = gradienteCubito;
+    ctx.fillRect(0, 525, canvas.width, 100);
+
+    ctx.fillStyle = NARANJA_SUELO;
+    for (let i = 0; i < 40; i++) {
+      if (i % 2 !== 0) {
+        ctx.fillRect(i * 20, 515, 10, 10);
+      }
+    }
+
+    // Dibujar linea del suelo
+    ctx.fillStyle = NEGRO;
+    ctx.lineWidth = 5;
+    ctx.beginPath();
+    ctx.moveTo(0, 515);
+    ctx.lineTo(canvas.width, 515);
+    ctx.stroke();
+    ctx.closePath();
+    ctx.lineWidth = 1;
+
+    // Dibujar líneas en el suelo
+    ctx.fillStyle = NEGRO;
+    let comienzoLineasSuelo = 0;
+    for (let i = 0; i <= 9; i++) {
+      dibujarLineasSuelo(comienzoLineasSuelo, 530, 0);
+      comienzoLineasSuelo += 80;
+    }
+
+    // Dibujar bloques
+    ctx.strokeStyle = NEGRO;
+
+    const bloqueAzul = ctx.createLinearGradient(0, 0, canvas.width, 0);
+    bloqueAzul.addColorStop(0, "#90D0FF");
+    bloqueAzul.addColorStop(0.2, "#7FC5FF");
+    bloqueAzul.addColorStop(0.4, "#70B9FF");
+    bloqueAzul.addColorStop(0.6, "#65ADFF");
+    bloqueAzul.addColorStop(0.8, "#60A0FF");
+    ctx.fillStyle = bloqueAzul;
+    ctx.fillRect(350, 250, 200, 250);
+    ctx.strokeRect(350, 250, 200, 250);
+
+    const primerBloque = ctx.createLinearGradient(0, 0, canvas.width, 0);
+    primerBloque.addColorStop(0, "#FFC8B8");
+    primerBloque.addColorStop(0.2, "#FFBC9A");
+    primerBloque.addColorStop(0.4, "#FFB178");
+    primerBloque.addColorStop(0.6, "#FFAA52");
+    primerBloque.addColorStop(0.8, "#FFA61E");
+    ctx.fillStyle = primerBloque;
+    ctx.fillRect(250, 350, 200, 150);
+    ctx.strokeRect(250, 350, 200, 150);
+
+    ctx.fillStyle = ULTIMO_BLOQUE;
+    ctx.fillRect(770, 350, 30, 150);
+    ctx.strokeRect(770, 350, 30, 150);
+
+    // Dibujar tubería
+    const gradienteTuberia = ctx.createLinearGradient(0, 0, canvas.width, 0);
+    gradienteTuberia.addColorStop(0, "#69E337");
+    gradienteTuberia.addColorStop(0.09, "#63D830");
+    gradienteTuberia.addColorStop(0.18, "#5DCC29");
+    gradienteTuberia.addColorStop(0.27, "#56C122");
+    gradienteTuberia.addColorStop(0.36, "#50B61B");
+    gradienteTuberia.addColorStop(0.45, "#4AAA17");
+    gradienteTuberia.addColorStop(0.54, "#459E12");
+    gradienteTuberia.addColorStop(0.63, "#3F920E");
+    gradienteTuberia.addColorStop(0.72, "#38820D");
+    gradienteTuberia.addColorStop(0.81, "#31720B");
+    gradienteTuberia.addColorStop(0.9, "#2B630A");
+    gradienteTuberia.addColorStop(1, "#245408");
+    ctx.fillStyle = gradienteTuberia;
+    ctx.fillRect(610, 360, 100, 40);
+    ctx.strokeRect(610, 360, 100, 40);
+    ctx.fillRect(620, 400, 80, 100);
+    ctx.strokeRect(620, 400, 80, 100);
+
+    // Dibujar tornillos en los bloques
+    ctx.fillStyle = TORNILLO;
+    ctx.beginPath();
+    ctx.arc(365, 265, 10, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.stroke();
+    ctx.closePath();
+    ctx.beginPath();
+    ctx.arc(535, 265, 10, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.stroke();
+    ctx.closePath();
+    ctx.beginPath();
+    ctx.arc(535, 485, 10, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.stroke();
+    ctx.closePath();
+    ctx.beginPath();
+    ctx.arc(265, 365, 10, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.stroke();
+    ctx.closePath();
+    ctx.beginPath();
+    ctx.arc(265, 485, 10, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.stroke();
+    ctx.closePath();
+    ctx.beginPath();
+    ctx.arc(435, 365, 10, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.stroke();
+    ctx.closePath();
+    ctx.beginPath();
+    ctx.arc(435, 485, 10, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.stroke();
+    ctx.closePath();
+
+  </script>
+</body>
+</html>
