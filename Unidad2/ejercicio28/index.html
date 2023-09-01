@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ejercicio 28</title>
+  <style>
+    canvas {
+      border: 1px solid black;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="canvas" width="800" height="600"></canvas>
+  <script>
+    const canvas = document.getElementById('canvas');
+    const ctx = canvas.getContext('2d');
+    let x = 255;
+    let y = 255;
+    let dir = 0;
+    let xRandom = 0;
+    let yRandom = 0;
+
+    const generateRandomColor = () => {
+      const r = Math.floor(Math.random() * 256);
+      const g = Math.floor(Math.random() * 256);
+      const b = Math.floor(Math.random() * 256);
+      const a = Math.random();
+      return `rgba(${r}, ${g}, ${b}, ${a})`;
+    };
+
+    const generarCuadradoAleatorio = (generateNew) => {
+      if (generateNew) {
+        xRandom = Math.abs(Math.floor(Math.random() * canvas.width - 50));
+        yRandom = Math.abs(Math.floor(Math.random() * canvas.height - 50));
+      }
+      ctx.fillStyle = '#000000';
+      ctx.fillRect(xRandom, yRandom, 50, 50);
+    };
+
+    const detectarColision = (
+      playerX, playerY, playerWidth, playerHeight, objectX, objectY, objectWidth, objectHeight
+    ) => {
+      if (
+        playerX + playerWidth >= objectX &&
+        playerX <= objectX + objectWidth &&
+        playerY + playerHeight >= objectY &&
+        playerY <= objectY + objectHeight
+      ) {
+        return true;
+      }
+      return false;
+    };
+
+    const repaint = () => {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      generarCuadradoAleatorio(detectarColision(x, y, 50, 50, xRandom, yRandom, 50, 50));
+      ctx.fillStyle = generateRandomColor();
+      ctx.fillRect(x, y, 50, 50);
+      ctx.strokeRect(x, y, 50, 50);
+    };
+
+    const update = () => {
+      switch (dir) {
+        case 87:
+          y -= 10;
+          if (y < -50) { y = canvas.height }
+          break;
+        case 83:
+          y += 10;
+          if (y > canvas.height) { y = -50 }
+          break;
+        case 68:
+          x += 10;
+          if (x > canvas.width) { x = -50 }
+          break;
+        case 65:
+          x -= 10;
+          if (x < -50) { x = canvas.width }
+          break;
+      }
+      repaint();
+      window.requestAnimationFrame(update);
+    }
+
+    document.addEventListener("keydown", (e) => {
+      switch (e.keyCode) {
+        case 87:
+          dir = e.keyCode;
+          break;
+        case 83:
+          dir = e.keyCode;
+          break;
+        case 68:
+          dir = e.keyCode;
+          break;
+        case 65:
+          dir = e.keyCode;
+          break;
+      }
+    });
+
+    update();
+  </script>
+</body>
+</html>
