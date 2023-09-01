@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ejercicio 24</title>
+</head>
+<body>
+  <canvas id="canvas" width="800" height="600"></canvas>
+  <script>
+    const canvas = document.getElementById('canvas');
+    const ctx = canvas.getContext('2d');
+
+    // Colores
+    const FONDO = '#2000A1';
+    const PASTO_1 = '#80E000';
+    const PASTO_2 = '#40A000';
+    const PASTO_3 = '#006100';
+    const ANILLO = '#FCFC02';
+    const MADERA = '#8D3D00';
+    const CUADRO_OSCURO = '#611E01';
+    const CUADRO_CLARO = '#B96302';
+
+    // Fondo
+    ctx.fillStyle = FONDO;
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    // Fondo del piso
+    let startOscuro = false;
+    for (let k = 0; k < 8; k++) {
+      for (let i = 0; i <= 80; i++) {
+        (startOscuro) ? ctx.fillStyle = CUADRO_OSCURO : ctx.fillStyle = CUADRO_CLARO;
+        startOscuro = !startOscuro;
+        ctx.fillRect(i * 10, (canvas.height - 10) - k * 10, 10, 10);
+      }
+    }
+
+    // Pasto
+    ctx.fillStyle = PASTO_1;
+    ctx.fillRect(0, 520, canvas.width, 10);
+    ctx.fillStyle = PASTO_2;
+    ctx.fillRect(0, 510, canvas.width, 10);
+    ctx.fillStyle = PASTO_3;
+    ctx.fillRect(0, 500, canvas.width, 10);
+
+    // Anillos
+    ctx.strokeStyle = ANILLO;
+    ctx.beginPath();
+    ctx.arc(40, 460, 20, 0, Math.PI * 2);
+    ctx.stroke();
+    ctx.closePath();
+    ctx.beginPath();
+    ctx.arc(100, 460, 20, 0, Math.PI * 2);
+    ctx.stroke();
+    ctx.closePath();
+    ctx.beginPath();
+    ctx.arc(160, 460, 20, 0, Math.PI * 2);
+    ctx.stroke();
+    ctx.closePath();
+    ctx.beginPath();
+    ctx.arc(220, 460, 20, 0, Math.PI * 2);
+    ctx.stroke();
+    ctx.closePath();
+
+    // Tronco
+    ctx.fillStyle = MADERA;
+    ctx.fillRect(460, 290, 20, 210);
+
+    // Hojas
+    ctx.strokeStyle = PASTO_3;
+    ctx.fillStyle = PASTO_3;
+    ctx.beginPath();
+    ctx.moveTo(450, 270);
+    ctx.lineTo(410, 290);
+    ctx.lineTo(410, 320);
+    ctx.lineTo(480, 290);
+    ctx.lineTo(450, 270);
+    ctx.fill();
+    ctx.closePath();
+    ctx.beginPath();
+    ctx.moveTo(460, 290);
+    ctx.lineTo(510, 340);
+    ctx.lineTo(530, 370);
+    ctx.lineTo(550, 340);
+    ctx.lineTo(530, 300);
+    ctx.lineTo(500, 280);
+    ctx.lineTo(460, 290);
+    ctx.fill();
+    ctx.closePath();
+    ctx.beginPath();
+    ctx.moveTo(475, 290);
+    ctx.lineTo(465, 240);
+    ctx.lineTo(510, 200);
+    ctx.lineTo(570, 290);
+    ctx.lineTo(560, 320);
+    ctx.lineTo(520, 290);
+    ctx.lineTo(540, 310);
+    ctx.lineTo(475, 290);
+    ctx.fill();
+    ctx.closePath();
+    ctx.beginPath();
+    ctx.moveTo(480, 240);
+    ctx.lineTo(440, 220);
+    ctx.lineTo(410, 250);
+    ctx.lineTo(410, 280);
+    ctx.lineTo(480, 290);
+    ctx.fill();
+    ctx.closePath();
+
+    // Flor
+    ctx.fillStyle = PASTO_1;
+    ctx.fillRect(640, 420, 10, 80);
+    ctx.fillStyle = PASTO_3;
+    ctx.beginPath();
+    ctx.arc(645, 400, 20, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.closePath();
+    ctx.strokeStyle = 'yellow';
+    ctx.lineWidth = 2;
+    for (let i = 0; i < 60; i++) {
+      const angulo = (i * 6) * (Math.PI / 180);
+      const x1 = Math.cos(angulo) * 20 + 645;
+      const y1 = Math.sin(angulo) * 20 + 400;
+      const x2 = Math.cos(angulo) * 40 + 645;
+      const y2 = Math.sin(angulo) * 40 + 400;
+      ctx.beginPath();
+      ctx.moveTo(x1, y1);
+      ctx.lineTo(x2, y2);
+      ctx.stroke();
+      ctx.closePath();
+    }
+
+    canvas.addEventListener('click', (e) => {
+      console.log(`X: ${e.layerX}, Y: ${e.layerY}`);
+    });
+  </script>
+</body>
+</html>
