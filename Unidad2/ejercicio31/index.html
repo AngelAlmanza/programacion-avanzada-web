@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ejercicio 31</title>
+  <style>
+    canvas {
+      border: 1px solid black;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="canvas" width="800" height="600"></canvas>
+  <script>
+    const canvas = document.getElementById('canvas');
+    const ctx = canvas.getContext('2d');
+    const canvasWidth = canvas.width;
+    const canvasHeight = canvas.height;
+    const muros = [
+      { x: 200, y: 100, width: 200, height: 30 },
+    ];
+    let x = 255;
+    let y = 255;
+    let dir = 0;
+    let xRandom = 0;
+    let yRandom = 0;
+    let velocidad = 10;
+
+    const generateRandomColor = () => {
+      const r = Math.floor(Math.random() * 256);
+      const g = Math.floor(Math.random() * 256);
+      const b = Math.floor(Math.random() * 256);
+      const a = Math.random();
+      return `rgba(${r}, ${g}, ${b}, ${a})`;
+    };
+
+    const generarCuadradoAleatorio = (generateNew) => {
+      if (generateNew) {
+        xRandom = Math.abs(Math.floor(Math.random() * canvasWidth - 50));
+        yRandom = Math.abs(Math.floor(Math.random() * canvasHeight - 50));
+      }
+      ctx.fillStyle = '#000000';
+      ctx.fillRect(xRandom, yRandom, 50, 50);
+    };
+
+    const detectarColision = (
+      playerX, playerY, playerWidth, playerHeight, objectX, objectY, objectWidth, objectHeight
+    ) => {
+      if (
+        playerX + playerWidth >= objectX &&
+        playerX <= objectX + objectWidth &&
+        playerY + playerHeight >= objectY &&
+        playerY <= objectY + objectHeight
+      ) {
+        return true;
+      }
+      return false;
+    };
+
+    const detectarColisionMuro = (
+      playerX, playerY, playerWidth, playerHeight, muros
+    ) => {
+      const colisiones = {
+        'W': false,
+        'A': false,
+        'S': false,
+        'D': false,
+      };
+      for (const muro of muros) {
+        if (
+          playerX + playerWidth >= muro.x &&
+          playerX <= muro.x + muro.width &&
+          playerY + playerHeight >= muro.y &&
+          playerY <= muro.y + muro.height
+        ) {
+          if (playerY <= muro.y + muro.height) {
+            colisiones['W'] = true;
+          }
+          if (playerX <= muro.x + muro.width) {
+            colisiones['A'] = true;
+          }
+          if (playerY + playerHeight >= muro.y) {
+            colisiones['S'] = true;
+          }
+          if (playerX + playerWidth >= muro.x) {
+            colisiones['D'] = true;
+          }
+        }
+      }
+      return colisiones;
+    };
+
+    const repaint = () => {
+      ctx.clearRect(0, 0, canvasWidth, canvasHeight);
+      ctx.fillStyle = '#053B50';
+      ctx.fillRect(200, 100, 200, 30);
+      generarCuadradoAleatorio(detectarColision(x, y, 50, 50, xRandom, yRandom, 50, 50));
+      ctx.fillStyle = generateRandomColor();
+      ctx.fillRect(x, y, 50, 50);
+      ctx.strokeRect(x, y, 50, 50);
+    };
+
+    const update = () => {
+      let nextX = x;
+      let nextY = y;
+
+      switch (dir) {
+        case 87: // W
+          nextY -= velocidad;
+          break;
+        case 83: // S
+          nextY += velocidad;
+          break;
+        case 68: // D
+          nextX += velocidad;
+          break;
+        case 65: // A
+          nextX -= velocidad;
+          break;
+      }
+
+      const colisionesMuro = detectarColisionMuro(nextX, nextY, 50, 50, muros);
+
+      if (!colisionesMuro.W && dir === 87) {
+        y = nextY;
+      }
+      if (!colisionesMuro.S && dir === 83) {
+        y = nextY;
+      }
+      if (!colisionesMuro.A && dir === 65) {
+        x = nextX;
+      }
+      if (!colisionesMuro.D && dir === 68) {
+        x = nextX;
+      }
+
+      if (x > canvasWidth) {
+        x = -50;
+      } else if (x < -50) {
+        x = canvasWidth;
+      }
+      if (y > canvasHeight) {
+        y = -50;
+      } else if (y < -50) {
+        y = canvasHeight;
+      }
+
+      repaint();
+      window.requestAnimationFrame(update);
+    };
+
+    document.addEventListener("keydown", (e) => {
+      switch (e.keyCode) {
+        case 87:
+          dir = e.keyCode;
+          break;
+        case 83:
+          dir = e.keyCode;
+          break;
+        case 68:
+          dir = e.keyCode;
+          break;
+        case 65:
+          dir = e.keyCode;
+          break;
+      }
+    });
+
+    update();
+  </script>
+</body>
+</html>
