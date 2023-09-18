@@ -8,6 +8,20 @@
   /* font-weight: normal; */
 }
 
+button {
+  border: none;
+  outline: none;
+  border-radius: 8px;
+  padding: 8px 16px;
+  margin: 12px 0;
+  background-color: var(--vt-c-text-dark-2);
+}
+input {
+  display: block;
+  margin: 12px 0;
+  width: 200px;
+}
+
 /* a,
 .green {
   text-decoration: none;
