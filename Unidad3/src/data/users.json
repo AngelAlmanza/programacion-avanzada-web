@@ -1,7 +1,7 @@
 [
   {
     "name": "Angel",
-    "lastaname": "Almanza",
+    "lastname": "Almanza",
     "email": "almanza.angel245@gmail.com",
     "password": "12345",
     "roleID": 1,
@@ -9,7 +9,7 @@
   },
   {
     "name": "Daniel",
-    "lastaname": "Trejo",
+    "lastname": "Trejo",
     "email": "trejo.daniel245@gmail.com",
     "password": "12345",
     "roleID": 2,
