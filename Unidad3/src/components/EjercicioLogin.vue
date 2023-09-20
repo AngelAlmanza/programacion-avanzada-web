@@ -1,19 +1,17 @@
 <template>
-  <h1>Login</h1>
+  <h1 v-if="!authed">Login</h1>
   <fieldset>
     <legend>Acceso al panel</legend>
-    <form>
+    <form v-if="!authed">
       <label for="email">Correo electronico</label>
       <input type="email" name="email" id="email" v-model="email">
       <label for="password">Password</label>
       <input type="password" name="password" id="password" v-model="password">
-      <div>
-        <button @click="signIn($event)">Acceder</button>
-        <button @click="signOut($event)" v-if="authed">Cerrar Sesión</button>
-      </div>
+      <button @click="signIn($event)">Acceder</button>
     </form>
+    <button @click="signOut($event)" v-if="authed">Cerrar Sesión</button>
   </fieldset>
-  <table>
+  <table v-if="authed">
     <caption>Información de usuarios</caption>
     <tr>
       <th>ID</th>
@@ -86,6 +84,7 @@ import UserRow from './UserRow.vue';
     e.preventDefault();
     sessionStorage.removeItem('user');
     authed.value = false;
+    swal('Has cerrado sesión');
   };
 
   onMounted(isLoggued);
