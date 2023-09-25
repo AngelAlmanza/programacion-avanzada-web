@@ -4,7 +4,7 @@
     "lastname": "Almanza",
     "email": "almanza.angel245@gmail.com",
     "password": "12345",
-    "roleID": 1,
+    "roleID": 0,
     "avatar": ""
   },
   {
@@ -12,7 +12,7 @@
     "lastname": "Trejo",
     "email": "trejo.daniel245@gmail.com",
     "password": "12345",
-    "roleID": 2,
+    "roleID": 1,
     "avatar": ""
   }
 ]
