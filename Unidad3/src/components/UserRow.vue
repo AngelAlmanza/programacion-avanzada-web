@@ -12,7 +12,6 @@
 </template>
 
 <script setup>
-  import { defineEmits } from 'vue';
   defineProps(['name', 'lastname', 'email', 'password', 'id']);
 
   const emits = defineEmits(['remove', 'editUser']);
