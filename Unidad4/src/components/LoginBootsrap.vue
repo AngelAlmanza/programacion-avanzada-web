@@ -1,0 +1,42 @@
+<template>
+  <div class="container d-flex justify-content-center align-items-center flex-column vh-100 pb-4">
+    <h2>Login</h2>
+    <form class="border-1 border-dark-subtle rounded py-4 px-2 shadow-lg mt-4 mb-5">
+      <div class="w-100 mb-4 d-flex justify-content-center">
+        <img class="w-25" src="../assets/bootstrap-icon.png" alt="Bootstrap Icon">
+      </div>
+      <div class="form-floating mb-3">
+        <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+        <label for="floatingInput">Email address</label>
+      </div>
+      <div class="form-floating">
+        <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
+        <label for="floatingPassword">Password</label>
+      </div>
+      <div class="mt-3">
+        <div class="form-check mb-2">
+          <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+          <label class="form-check-label" for="flexCheckDefault">
+            Recuerdame
+          </label>
+        </div>
+        <div>
+          <button type="button" class="btn btn-link">¿Olvidaste tu contraseña?</button>
+        </div>
+      </div>
+      <div class="w-100 d-flex justify-content-center mt-4">
+        <button type="button" class="btn btn-primary col-6">Iniciar Sesión</button>
+      </div>
+    </form>
+  </div>
+</template>
+
+<script setup>
+
+</script>
+
+<style lang="css" scoped>
+  /* form {
+    width: 95%;
+  } */
+</style>
