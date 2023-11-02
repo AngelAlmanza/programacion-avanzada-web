@@ -8,5 +8,8 @@
 </head>
 <body>
     <h1>Hola {{ $name }} {{ $lastname }}</h1>
+    @isset($controller)
+        <p>Desde el controlador</p>
+    @endisset
 </body>
 </html>

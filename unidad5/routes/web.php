@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\GreetingsController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -44,3 +45,7 @@ Route::get('/saludo/{name}/{lastname}', function ($name, $lastname) {
     }
     return view('greeting', ['name' => ucwords(strtolower($name)), 'lastname' => ucwords(strtolower($lastname))]);
 })->name('greeting');
+
+Route::controller(GreetingsController::class)->group(function () {
+    Route::get('/saludo-controlador/{name}/{lastname}', 'index');
+})->name('greeting-controller');
