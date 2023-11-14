@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CarController;
 use App\Http\Controllers\GreetingsController;
 use Illuminate\Support\Facades\Route;
 
@@ -49,3 +50,8 @@ Route::get('/saludo/{name}/{lastname}', function ($name, $lastname) {
 Route::controller(GreetingsController::class)->group(function () {
     Route::get('/saludo-controlador/{name}/{lastname}', 'index');
 })->name('greeting-controller');
+
+Route::controller(CarController::class)->group(function () {
+    Route::get('/cars', 'index')->name('cars');
+    Route::get('/cars/{id}', 'show')->name('car');
+});
